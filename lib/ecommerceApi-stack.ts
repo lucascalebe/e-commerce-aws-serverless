@@ -8,7 +8,7 @@ interface ECommerceApiStackProps extends cdk.StackProps {
     productsFetchHandler: lambdaNodeJS.NodejsFunction
 }
 
-export class ProductsAppStack extends cdk.Stack {
+export class ECommerceApiStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props: ECommerceApiStackProps) {
         super(scope, id, props)
 
