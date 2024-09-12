@@ -19,9 +19,9 @@ export class ProductsAppStack extends cdk.Stack {
             deployOptions: {
                 accessLogDestination: new apigateway.LogGroupLogDestination(logGroup),
                 accessLogFormat: apigateway.AccessLogFormat.jsonWithStandardFields({
-                    ip: false,
+                    ip: true,
                     caller: true,
-                    user: false,
+                    user: true,
                     requestTime: true,
                     httpMethod: true,
                     protocol: true,
