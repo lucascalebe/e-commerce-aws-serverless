@@ -66,4 +66,25 @@ export class ProductRepository {
             throw new Error(`Product with id ${productId} not found`)
         }
     }
+
+    async updateProduct(productId: string, product: Product): Promise<Product> {
+        const data = await this.dynamoClient.update({
+            TableName: this.productsTable,
+            Key: {
+                id: productId
+            },
+            ConditionExpression: "attribute_exists(id)",
+            UpdateExpression: "set productName = :productName, price = :price, model = :model",
+            ExpressionAttributeValues: {
+                ":productName": product.productName,
+                ":price": product.price,
+                ":model": product.model
+            },
+            ReturnValues: "UPDATED_NEW"
+        }).promise()
+
+        data.Attributes!.id = productId
+
+        return data.Attributes as Product
+    }
 }
