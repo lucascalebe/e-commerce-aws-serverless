@@ -25,7 +25,7 @@ export class ProductRepository {
         return data.Items as Product[]
     }
 
-    async findProductById(id: number): Promise<Product> {
+    async findProductById(id: string): Promise<Product> {
         const data = await this.dynamoClient.get({
             TableName: this.productsTable,
             Key: {
