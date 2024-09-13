@@ -7,6 +7,7 @@ export interface Product {
     price: number;
     model: string;
     code: string;
+    productUrl: string;
 }
 
 export class ProductRepository {
@@ -75,12 +76,13 @@ export class ProductRepository {
                 id: productId
             },
             ConditionExpression: "attribute_exists(id)",
-            UpdateExpression: "set productName = :productName, price = :price, model = :model, code = :code",
+            UpdateExpression: "set productName = :productName, price = :price, model = :model, code = :code, productUrl = :productUrl",
             ExpressionAttributeValues: {
                 ":productName": product.productName,
                 ":price": product.price,
                 ":model": product.model,
-                ":code": product.code
+                ":code": product.code,
+                ":productUrl": product.productUrl
             },
             ReturnValues: "UPDATED_NEW"
         }).promise()
