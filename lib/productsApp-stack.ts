@@ -60,7 +60,8 @@ export class ProductsAppStack extends cdk.Stack {
             description: "Create, Delete and Update products from DynamoDB",
             environment: {
                 PRODUCTS_TABLE: this.productsTable.tableName
-            }
+            },
+            layers: [productsLayer]
         })
 
         this.productsTable.grantWriteData(this.productsAdminHandler)
