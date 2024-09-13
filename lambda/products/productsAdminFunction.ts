@@ -22,13 +22,13 @@ export async function handler(event: APIGatewayProxyEvent, context: Context): Pr
             console.log(`PUT /products/${productId}`)
             return {
                 statusCode: 200,
-                body: JSON.stringify({ message: "PUT /products/{id} Updated" })
+                body: JSON.stringify({ message: `PUT /products/${productId} Updated` })
             }
         } else if (httpMethod === "DELETE") {
             console.log(`DELETE /products/${productId}`)
             return {
                 statusCode: 200,
-                body: JSON.stringify({ message: "DELETE /products/{id} Updated" })
+                body: JSON.stringify({ message: `DELETE /products/${productId} Updated` })
             }
         }
     }
