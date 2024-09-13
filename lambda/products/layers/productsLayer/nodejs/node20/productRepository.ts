@@ -39,4 +39,14 @@ export class ProductRepository {
             throw new Error(`Product with id ${id} not found`)
         }
     }
+
+    async create(product: Product): Promise<Product> {
+        product.id = uuid()
+        await this.dynamoClient.put({
+            TableName: this.productsTable,
+            Item: product
+        }).promise()
+
+        return product
+    }
 }
