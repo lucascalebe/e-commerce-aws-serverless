@@ -32,6 +32,11 @@ export class ProductsAppStack extends cdk.Stack {
                 sourceMap: false
             },
             description: "Fetch products from DynamoDB",
+            environment: {
+                PRODUCTS_TABLE: this.productsTable.tableName
+            }
         })
+
+        this.productsTable.grantReadData(this.productsFetchHandler)
     }
 }
