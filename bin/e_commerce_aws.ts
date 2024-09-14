@@ -4,6 +4,7 @@ import * as cdk from 'aws-cdk-lib';
 import { ProductsAppStack } from '../lib/productsApp-stack';
 import { ECommerceApiStack } from '../lib/ecommerceApi-stack';
 import { ProductsAppLayersStack } from '../lib/productsAppLayers-stack';
+import { EventsDynamoStack } from 'lib/eventsDynamo-stack';
 
 const app = new cdk.App();
 
@@ -22,12 +23,19 @@ const productsAppLayersStack = new ProductsAppLayersStack(app, "ProductsAppLayer
   tags
 })
 
+const eventsDynamoStack = new EventsDynamoStack(app, "EventsDynamo", {
+  env,
+  tags
+})
+
 const productsAppStack = new ProductsAppStack(app, 'ProductsApp', {
+  eventsDynamoTable: eventsDynamoStack.table,
   env,
   tags
 });
 
 productsAppStack.addDependency(productsAppLayersStack)
+productsAppStack.addDependency(eventsDynamoStack)
 
 const eCommerceApiStack = new ECommerceApiStack(app, "ECommerceApi", {
   productsFetchHandler: productsAppStack.productsFetchHandler,
