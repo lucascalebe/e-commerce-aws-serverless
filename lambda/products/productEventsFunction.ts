@@ -34,7 +34,7 @@ function createEvent(event: ProductEvent) {
             requestId: event.requestId,
             eventType: event.eventType,
             info: {
-                productId: event.productCode,
+                productId: event.productId,
                 productPrice: event.productPrice
             },
             ttl: ttl
